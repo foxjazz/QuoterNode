@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 require('dotenv').config({ path: './keys.env' });
+const cron = require('node-cron');
 
 const rapidApiKey = process.env.RapidAPIKey;
 const botToken = process.env.botToken;
@@ -87,3 +88,4 @@ setQuote().then(() => {
     
     
 })
+cron.schedule('*/5 * * * *', setQuote);
