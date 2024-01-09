@@ -1,0 +1,25 @@
+# Node.js related
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE or editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+.DS_Store
+
+# Dependency directories
+jspm_packages/
+typings/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables file (if used)
+.env
