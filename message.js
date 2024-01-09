@@ -1,8 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
-require('dotenv').config();
-
-var messageText = 'Hello from Node.js!';
+require('dotenv').config({ path: './keys.env' });
 const botToken = process.env.botToken;
 const chatId = process.env.chatId;
 
@@ -21,12 +19,12 @@ function sendMessageToBot(botToken, chatId, messageText) {
       console.error('Error sending message:', error.message);
     });
 }
-
+module.exports = sendMessageToBot;
 // Usage example:
 
 
 
-sendMessageToBot(botToken, chatId, messageText);
+
 /*
 console.log(process.env.DB_HOST);
 console.log(process.env.DB_USER);

@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 require('dotenv').config();
 const rapidApiKey = process.env.RapidAPIKey;
-async function saveQuote(botToken, chatId, messageText) {
+function saveQuote(botToken, chatId, messageText) {
   
     const options = {
       method: 'GET',
@@ -19,7 +19,7 @@ async function saveQuote(botToken, chatId, messageText) {
     };
     filepath = ""
     try {
-      const response = await axios.request(options);
+      const response = axios.request(options);
       quoteData  = JSON.stringify(response.data);
       
       try {
