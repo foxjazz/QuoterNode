@@ -4,6 +4,20 @@ const fs = require('fs');
 const axios = require('axios');
 require('dotenv').config({ path: './keys2.env' });
 
+function appendLogWithTimestamp(message) {
+    const timestamp = new Date().toISOString(); // Get current timestamp
+    const logMessage = `${timestamp} - ${message}\n`; // Append timestamp to the log message
+    
+    // Append log message to a file
+    fs.appendFile('weatherstatus.log', logMessage, (err) => {
+      if (err) {
+        console.error('Error appending to log file:', err);
+      } else {
+        console.log('Log message appended to file:', logMessage);
+      }
+    });
+  }
+
 async function appendWeatherDataToFile() {
   const apiKey = process.env.WeatherApiKey;
   const coordinates = '40.74648819816704,-8.061093484911366';
@@ -24,12 +38,14 @@ async function appendWeatherDataToFile() {
     console.error('Error fetching weather data:', error.message);
   }
 }
-
+var cnter = 0;
+appendLogWithTimestamp("iteration: " + cnter);
+appendWeatherDataToFile();
 // Call the function to retrieve weather data and append it to the file
 setInterval(() => {
     // Perform some minimal operation or stay idle
     // For example, logging a message
-
+    appendLogWithTimestamp("iteration: " + cnter);
     appendWeatherDataToFile();
     console.log('Application is idle...');
   }, 1000 * 60); //
