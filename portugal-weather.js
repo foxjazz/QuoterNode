@@ -31,5 +31,6 @@ function start(){
     appendWeatherDataToFile();
     return;
 }
-
-cron.schedule('*/1 * * * *', start);
+cron.schedule('*/1 * * * *', () => {
+    start();
+  });
