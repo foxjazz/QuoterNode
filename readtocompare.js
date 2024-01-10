@@ -6,7 +6,7 @@ require('dotenv').config({ path: './keys2.env' });
 const rapidApiKey = process.env.RapidAPIKey;
 const botToken = process.env.botToken;
 const chatId = process.env.chatId;
-
+var bReadFile = true;
 
 
 function sendMessageToBot(botToken, chatId, messageText) {
@@ -62,14 +62,17 @@ async function setQuote() {
     }
 }
 function readFileSync() {
-    try {
-      const fileContent = fs.readFileSync(filepath, 'utf8');
-      xQuote = JSON.parse(fileContent)['Realtime Currency Exchange Rate']['5. Exchange Rate']
-      return
-      
-    } catch (err) {
-      console.error('Error reading file:', err);
-      return null;
+    if(bReadFile){
+        bReadFile = false;
+        try {
+        const fileContent = fs.readFileSync(filepath, 'utf8');
+        xQuote = JSON.parse(fileContent)['Realtime Currency Exchange Rate']['5. Exchange Rate']
+        return
+        
+        } catch (err) {
+        console.error('Error reading file:', err);
+        return null;
+        }
     }
   }
 function start(){
@@ -79,10 +82,12 @@ function start(){
         if (newQuote > xQuote + .005){
             sendMessageToBot(botToken, chatId, "Euro is higher, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
+            xQuote = newQuote;
         }
         if (newQuote < xQuote - .005){
             sendMessageToBot(botToken, chatId, "Euro is lower, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
+            xQuote = newQuote;
         }
     })
 }
@@ -120,6 +125,6 @@ function scheduledProcess() {
       // Place your process logic here
     }
   }
-  
+  start();
   // Run the scheduled process every minute (adjust the interval as needed)
   setInterval(scheduledProcess, 60 * 1000 * 5); 
