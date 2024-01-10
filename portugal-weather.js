@@ -29,6 +29,7 @@ async function appendWeatherDataToFile() {
 // Call the function to retrieve weather data and append it to the file
 function start(){
     appendWeatherDataToFile();
+    return;
 }
 
 cron.schedule('*/1 * * * *', start);
