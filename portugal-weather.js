@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const axios = require('axios');
-require('dotenv').config({ path: './keys.env' });
+require('dotenv').config({ path: './keys2.env' });
 const cron = require('node-cron');
 
 async function appendWeatherDataToFile() {

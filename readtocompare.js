@@ -1,6 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
-require('dotenv').config({ path: './keys.env' });
+require('dotenv').config({ path: './keys2.env' });
 const cron = require('node-cron');
 
 const rapidApiKey = process.env.RapidAPIKey;
