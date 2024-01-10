@@ -76,11 +76,11 @@ function start(){
     setQuote().then(() => {
         readFileSync();
     
-        if (newQuote > xQuote - .005){
+        if (newQuote > xQuote + .005){
             sendMessageToBot(botToken, chatId, "Euro is higher, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
         }
-        if (newQuote < xQuote + .005){
+        if (newQuote < xQuote - .005){
             sendMessageToBot(botToken, chatId, "Euro is lower, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
         }
