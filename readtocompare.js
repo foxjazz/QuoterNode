@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 require('dotenv').config({ path: './keys2.env' });
-const cron = require('node-cron');
+
 
 const rapidApiKey = process.env.RapidAPIKey;
 const botToken = process.env.botToken;
@@ -86,5 +86,40 @@ function start(){
         }
     })
 }
-
-cron.schedule('*/5 14-22 * * 1-5', start);
+var cntr = 0;
+function appendLogWithTimestamp(message) {
+    const timestamp = new Date().toISOString(); // Get current timestamp
+    const logMessage = `${timestamp} - ${message}\n`; // Append timestamp to the log message
+    
+    // Append log message to a file
+    fs.appendFile('EuroQuoter.log', logMessage, (err) => {
+      if (err) {
+        console.error('Error appending to log file:', err);
+      } else {
+        console.log('Log message appended to file:', logMessage);
+      }
+    });
+  }
+function scheduledProcess() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getUTCDay();
+    const currentHour = currentDate.getUTCHours();
+  
+    // Check if it's Monday to Friday (Monday = 1, ..., Friday = 5)
+    const isWeekday = currentDay >= 1 && currentDay <= 5;
+  
+    // Check if it's between 13:00 and 23:00 UTC
+    const isWithinTimeRange = currentHour >= 13 && currentHour <= 23;
+  
+    if (isWeekday && isWithinTimeRange) {
+      // Perform your process here
+      cntr++;
+      appendLogWithTimestamp("iteration: " + cntr);
+      start();
+      console.log('Running scheduled process...');
+      // Place your process logic here
+    }
+  }
+  
+  // Run the scheduled process every minute (adjust the interval as needed)
+  setInterval(scheduledProcess, 60 * 1000 * 5); 

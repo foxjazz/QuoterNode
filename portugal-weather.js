@@ -45,6 +45,7 @@ appendWeatherDataToFile();
 setInterval(() => {
     // Perform some minimal operation or stay idle
     // For example, logging a message
+    cnter++;
     appendLogWithTimestamp("iteration: " + cnter);
     appendWeatherDataToFile();
     console.log('Application is idle...');
