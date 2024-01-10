@@ -27,10 +27,12 @@ async function appendWeatherDataToFile() {
 }
 
 // Call the function to retrieve weather data and append it to the file
-function start(){
+setInterval(() => {
+    // Perform some minimal operation or stay idle
+    // For example, logging a message
     appendWeatherDataToFile();
-    return;
-}
-cron.schedule('*/1 * * * *', () => {
-    start();
-  });
+    console.log('Application is idle...');
+  }, 1000); //
+    
+    
+
