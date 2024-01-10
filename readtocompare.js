@@ -72,20 +72,19 @@ function readFileSync() {
       return null;
     }
   }
-setQuote().then(() => {
+function start(){
+    setQuote().then(() => {
         readFileSync();
     
         if (newQuote > xQuote - .005){
             sendMessageToBot(botToken, chatId, "Euro is higher, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
         }
-    
         if (newQuote < xQuote + .005){
             sendMessageToBot(botToken, chatId, "Euro is higher, current: " + newQuote);
             fs.writeFileSync(filepath,  JSON.stringify(quoteData), fs.writeFile);
         }
-        
-    
-    
-})
-cron.schedule('*/5 14-22 * * 1-5', setQuote);
+    })
+}
+
+cron.schedule('*/5 14-22 * * 1-5', start);
