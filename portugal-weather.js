@@ -3,7 +3,6 @@
 const fs = require('fs');
 const axios = require('axios');
 require('dotenv').config({ path: './keys2.env' });
-const cron = require('node-cron');
 
 async function appendWeatherDataToFile() {
   const apiKey = process.env.WeatherApiKey;
@@ -30,9 +29,10 @@ async function appendWeatherDataToFile() {
 setInterval(() => {
     // Perform some minimal operation or stay idle
     // For example, logging a message
+
     appendWeatherDataToFile();
     console.log('Application is idle...');
-  }, 1000); //
+  }, 1000 * 60); //
     
     
 
