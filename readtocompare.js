@@ -88,4 +88,4 @@ setQuote().then(() => {
     
     
 })
-cron.schedule('*/5 * * * *', setQuote);
+cron.schedule('*/5 14-22 * * 1-5', setQuote);
