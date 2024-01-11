@@ -28,7 +28,7 @@ async function appendWeatherDataToFile() {
     const data = response.data;
 
     if (response.status === 200) {
-      const weatherData = JSON.stringify(data, null, 2);
+      const weatherData = JSON.stringify(data + ",", null, 2);
       fs.appendFileSync('portugal_weather.log', `${weatherData}\n`);
       console.log('Weather data appended to portugal_weather.log');
     } else {
