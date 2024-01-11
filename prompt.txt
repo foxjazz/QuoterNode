@@ -1,7 +1,7 @@
 given a log file of portugal_weather.log pasted below, how would I write a nodejs service port:3200 to retrieve a graphical rep of temperature / humidity /cloud /uv
-this needs to be done without requiring canvas.  chart.js will load and is ok to require.
+this needs to be done without requiring canvas.  chart.js will load and is ok to require. also the chart needs to have a dark background
 
- {
+ [{
   "location": {
     "name": "Sao Pedro Do Sul",
     "region": "Viseu",
@@ -41,7 +41,7 @@ this needs to be done without requiring canvas.  chart.js will load and is ok to
     "gust_mph": 12.5,
     "gust_kph": 20.2
   }
-}
+},
 {
   "location": {
     "name": "Sao Pedro Do Sul",
@@ -82,4 +82,4 @@ this needs to be done without requiring canvas.  chart.js will load and is ok to
     "gust_mph": 12.5,
     "gust_kph": 20.2
   }
-}
+}]

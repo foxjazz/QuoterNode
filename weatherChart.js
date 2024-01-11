@@ -49,7 +49,8 @@ app.get('/', (req, res) => {
         borderWidth: 1,
         yAxisID: 'uv'
       },
-    ],
+    ]
+    
   };
 
   // Send the HTML page with the chart
@@ -61,8 +62,22 @@ app.get('/', (req, res) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Weather Data Chart</title>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <style>
+        body {
+            background-color: #000; /* Set a dark background color */
+            color: #ccd; /* Set text color to white */
+            font-family: 'Arial', sans-serif; /* Optional: Set a font family */
+        }
+      </style>
     </head>
     <body>
+        <style>
+            body {
+                background-color: #000; /* Set a dark background color */
+                color: #ccd; /* Set text color to white */
+                font-family: 'Arial', sans-serif; /* Optional: Set a font family */
+            }
+        </style>
       <canvas id="myChart" width="800" height="400"></canvas>
       <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -75,22 +90,42 @@ app.get('/', (req, res) => {
                 temperature: {
                   type: 'linear',
                   position: 'left',
+                  ticks: {
+                    color: 'rgba(255, 255, 255, 0.7)', // Lighter color for temperature axis labels
+                  },
                 },
                 humidity: {
                   type: 'linear',
                   position: 'left',
+                  ticks: {
+                    color: 'rgba(255, 255, 255, 0.7)', // Lighter color for temperature axis labels
+                  },
                 },
                 cloud: {
                   type: 'linear',
                   position: 'left',
+                  ticks: {
+                    color: 'rgba(255, 255, 255, 0.7)', // Lighter color for temperature axis labels
+                  },
                 },
                 uv: {
                   type: 'linear',
                   position: 'right',
+                  ticks: {
+                    color: 'rgba(255, 255, 255, 0.7)', // Lighter color for temperature axis labels
+                  },
                   max: 10,
                 },
               },
+              plugins: {
+                legend: {
+                  labels: {
+                    color: 'rgba(255, 255, 255, 0.7)', // Lighter color for legend labels
+                  },
+                },
+              },
             },
+            
           });
         });
       </script>
