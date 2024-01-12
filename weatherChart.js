@@ -8,7 +8,16 @@ const cwd = process.cwd();
 app.get('/', (req, res) => {
   // Read the log file and parse JSON
   const logContent = fs.readFileSync(cwd + '/portugal_weather.log', 'utf8');
-  const logs = JSON.parse("[" + logContent + "]");
+  // logContent = logContent.replace(/,$/, '');
+  let stringWithoutNewlines = logContent.replace(/\n/g, '');
+
+  // Remove the last comma
+  if (stringWithoutNewlines.endsWith(',')) {
+    stringWithoutNewlines = stringWithoutNewlines.slice(0, -1);
+  }
+  
+  const result = "[" + stringWithoutNewlines + "]";
+  const logs = JSON.parse(result);
 
   // Extract relevant data for the chart
   const labels = logs.map((entry) => entry.location.localtime);
@@ -76,10 +85,10 @@ app.get('/', (req, res) => {
                 background-color: #000; /* Set a dark background color */
                 color: #ccd; /* Set text color to white */
                 font-family: 'Arial', sans-serif; /* Optional: Set a font family */
-            }
+            }   
         </style>
       <canvas id="myChart" width="800" height="400"></canvas>
-      <script>
+      <script>  
         document.addEventListener('DOMContentLoaded', function () {
           var ctx = document.getElementById('myChart').getContext('2d');
           var myChart = new Chart(ctx, {
